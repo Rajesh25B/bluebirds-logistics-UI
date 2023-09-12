@@ -18,7 +18,7 @@ function LoginForm(props) {
       }}
     >
       <Container maxWidth="sm">
-        <Box sx={{ mt: 3, mb: 3, pt: 10 }}>
+        <Box sx={{ mt: 6, mb: 3, pt: 10 }}>
           <Paper
             sx={{
               py: { xs: 4, md: 8 },
