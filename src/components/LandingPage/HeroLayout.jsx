@@ -33,6 +33,7 @@ function HeroLayout(props) {
   return (
     <HeroLayoutRoot>
       <Container
+        component="div"
         sx={{
           mt: 3,
           mb: 14,

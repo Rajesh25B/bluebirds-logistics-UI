@@ -10,7 +10,8 @@ import RTPhoneField from "../components/Auth/CustomFields/RTPhoneField";
 import RTPasswordField from "../components/Auth/CustomFields/RTPasswordField";
 import RFTextField from "../components/Auth/CustomFields/RTTextField";
 
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [sent, setSent] = useState(false);
@@ -58,7 +59,7 @@ function Register() {
             letterSpacing="-1.2px"
             fontSize="1.1em"
           >
-            <Link href="/" underline="always">
+            <Link to="/login/" underline="always">
               Already have an account?
             </Link>
           </Typography>
@@ -124,7 +125,7 @@ function Register() {
                 <FormButton
                   sx={{ mt: 3, mb: 2 }}
                   disabled={submitting || sent}
-                  color="secondary"
+                  color="primary"
                 >
                   {submitting || sent ? "In progress…" : "Register"}
                 </FormButton>

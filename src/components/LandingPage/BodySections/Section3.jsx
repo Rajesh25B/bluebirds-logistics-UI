@@ -14,8 +14,16 @@ function CustomTabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+        <Box sx={{ p: 2 }}>
+          <Typography
+            sx={{
+              fontWeight: "500",
+              fontSize: "1em",
+              letterSpacing: "-0.8px",
+            }}
+          >
+            {children}
+          </Typography>
         </Box>
       )}
     </div>
@@ -101,49 +109,21 @@ export default function Section3() {
         sx={{ display: "flex", justifyContent: "center" }}
       >
         <CustomTabPanel value={value} index={0}>
-          <Typography
-            component="p"
-            sx={{
-              fontWeight: "500",
-              fontSize: "1.25em",
-              letterSpacing: "-1px",
-            }}
-          >
-            {" "}
-            Our commitment to the safety and secure passage of your package is a
-            part of our DNA and we continue to be laser focused on this 24/7. We
-            have a team of experienced professionals who are dedicated to
-            providing you with the best possible service.
-          </Typography>
+          Our commitment to the safety and secure passage of your package is a
+          part of our DNA and we continue to be laser focused on this 24/7. We
+          have a team of experienced professionals who are dedicated to
+          providing you with the best possible service.
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <Typography
-            component="p"
-            sx={{
-              fontWeight: "500",
-              fontSize: "1.25em",
-              letterSpacing: "-1px",
-            }}
-          >
-            We are committed to 100% product delivery. We understand that your
-            time and money are important, and we take pride in delivering your
-            products on time and in perfect condition. We are always available
-            to answer your questions and address your concerns.
-          </Typography>
+          We are committed to 100% product delivery. We understand that your
+          time and money are important, and we take pride in delivering your
+          products on time and in perfect condition. We are always available to
+          answer your questions and address your concerns.
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          <Typography
-            component="p"
-            sx={{
-              fontWeight: "500",
-              fontSize: "1.25em",
-              letterSpacing: "-1px",
-            }}
-          >
-            We take pride in building trust with our customers. We are committed
-            to providing you with the best possible service, and we always
-            strive to exceed your expectations.
-          </Typography>
+          We take pride in building trust with our customers. We are committed
+          to providing you with the best possible service, and we always strive
+          to exceed your expectations.
         </CustomTabPanel>
       </Box>
     </Box>

@@ -6,10 +6,7 @@ import TwoFactorPage from "./pages/TwoFactorPage";
 function App() {
   return (
     <>
-      {/* <LandingPage /> */}
-      {/* <Register /> */}
-      {/* <Login /> */}
-      <TwoFactorPage />
+      <LandingPage />
     </>
   );
 }
