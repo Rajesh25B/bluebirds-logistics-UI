@@ -32,6 +32,7 @@ export default function Body() {
         mt={5}
       >
         <Typography
+          component={"span"}
           mt={12}
           color="inherit"
           align="center"
@@ -42,6 +43,7 @@ export default function Body() {
           Choose BlueBirds for Faster delivery.
         </Typography>
         <Typography
+          component={"span"}
           color="inherit"
           align="center"
           variant="h6"
@@ -60,7 +62,7 @@ export default function Body() {
         >
           More Info
         </Button>
-        <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
+        <Typography color="inherit" sx={{ mt: 2 }} component={"span"}>
           Discover the experience
         </Typography>
       </HeroLayout>

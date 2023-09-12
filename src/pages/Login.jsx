@@ -6,10 +6,18 @@ import RFTextField from "../components/Auth/CustomFields/RTTextField";
 import FormButton from "../components/Auth/FormButton";
 import FormFeedback from "../components/Auth/FormFeedback";
 import withRoot from "../components/Auth/withRoot";
-
-import { Avatar, Box, Link, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import LoginForm from "../components/Auth/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
+import { Link } from "react-router-dom";
+
+const CustomLink = ({ to, name }) => {
+  return (
+    <Link to={to} style={{ color: "inherit", textDecoration: "inherit" }}>
+      {name}
+    </Link>
+  );
+};
 
 function Login() {
   const [sent, setSent] = useState(false);
@@ -36,21 +44,20 @@ function Login() {
       <LoginForm>
         <Box align="center" mb={1}>
           <Avatar sx={{ backgroundColor: "primary.dark" }}>
-            <LockIcon bgcolor="pink" />
+            <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5" fontWeight="600">
             Login
           </Typography>
         </Box>
-        <Typography variant="body2" align="center" letterSpacing="-0.5px">
+        <Typography
+          variant="body2"
+          align="center"
+          letterSpacing="-0.5px"
+          color="blue"
+        >
           {"Not a member yet? "}
-          <Link
-            href="/premium-themes/onepirate/sign-up/"
-            align="center"
-            underline="always"
-          >
-            Sign Up here
-          </Link>
+          <CustomLink to="/register/" name="CLICK TO REGISTER" />
         </Typography>
 
         <Form
@@ -110,13 +117,13 @@ function Login() {
             </Box>
           )}
         </Form>
-        <Typography align="center" letterSpacing="-0.5px">
-          <Link
-            underline="none"
-            href="/premium-themes/onepirate/forgot-password/"
-          >
-            Forgot password?
-          </Link>
+        <Typography
+          variant="body2"
+          align="center"
+          letterSpacing="-0.5px"
+          color="blue"
+        >
+          <CustomLink to="/forgot-password/" name="Forgot Password?" />
         </Typography>
       </LoginForm>
     </>

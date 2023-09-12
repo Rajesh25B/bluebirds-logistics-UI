@@ -12,8 +12,9 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import MainLogo from "/src/assets/styles/svg/MainLogo";
 import styled from "@emotion/styled";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MenuIcon from "@mui/icons-material/Menu";
+import { Link } from "react-router-dom";
+import { CustomButtonRoute } from "../../routes/CustomButtonRoute";
 
 const theme = createTheme({
   palette: {
@@ -61,10 +62,10 @@ function Navbar() {
                 edge="start"
                 variant="text"
                 disableRipple
-                component="a"
-                href="/"
               >
-                <MainLogo />
+                <Link to={`/`}>
+                  <MainLogo />
+                </Link>
               </IconButton>
             </Box>
 
@@ -76,21 +77,11 @@ function Navbar() {
                 paddingLeft: { xs: "none", sm: "none", md: 30, lg: 60 },
               }}
             >
-              <Button color="inherit" component="a" href="/">
-                Track your package
-              </Button>
-              <Button color="inherit" component="a" href="/">
-                ABOUT
-              </Button>
-              <Button color="inherit" component="a" href="/">
-                Services
-              </Button>
-              <Button color="inherit" component="a" href="/">
-                Login
-              </Button>
-              <Button color="inherit" component="a" href="/">
-                Register
-              </Button>
+              <CustomButtonRoute to={`/track/`} name="Track your package" />
+              <CustomButtonRoute to={`/about/`} name="About" />
+              <CustomButtonRoute to={`/services/`} name="Services" />
+              <CustomButtonRoute to={`/login/`} name="Login" />
+              <CustomButtonRoute to={`/register/`} name="Register" />
             </Stack>
 
             <IconButton
@@ -121,24 +112,19 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleClose}>
-                <Button color="inherit" component="a" href="/">
-                  Track your package
-                </Button>
+                <CustomButtonRoute to={`/track/`} name="Track your package" />
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Button color="inherit" component="a" href="/">
-                  ABOUT
-                </Button>
+                <CustomButtonRoute to={`/about/`} name="About" />
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Button color="inherit" component="a" href="/">
-                  Login
-                </Button>
+                <CustomButtonRoute to={`/services/`} name="Services" />
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Button color="inherit" component="a" href="/">
-                  Register
-                </Button>
+                <CustomButtonRoute to={`/login/`} name="Login" />
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <CustomButtonRoute to={`/register/`} name="Register" />
               </MenuItem>
             </Menu>
           </CustomToolbar>

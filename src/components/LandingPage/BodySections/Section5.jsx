@@ -28,6 +28,34 @@ const theme = createTheme({
   },
 });
 
+function CustomCard({ backgroundCardImg, content1, content2 }) {
+  return (
+    <Card
+      sx={{
+        backgroundImage: `url(https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1254&q=80)`,
+        backgroundColor: "yellow",
+        display: "flex",
+        marginTop: "15px",
+      }}
+    >
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
+          <Typography fontWeight="600" fontSize="1em" letterSpacing="-1px">
+            {content1}
+          </Typography>
+        </CardContent>
+
+        <hr width="100%" />
+        <CardContent>
+          <Typography fontWeight="600" fontSize="1em" letterSpacing="-1px">
+            {content2}
+          </Typography>
+        </CardContent>
+      </Box>
+    </Card>
+  );
+}
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -39,11 +67,7 @@ function TabPanel(props) {
       aria-labelledby={`vertical-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
@@ -103,7 +127,7 @@ export default function Section5() {
             sx={{ borderRight: 1, borderColor: "divider", marginTop: "30px" }}
           >
             <Tab
-              label="North America"
+              label="New Delhi"
               {...a11yProps(0)}
               sx={{
                 fontWeight: "600",
@@ -112,7 +136,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="Asia"
+              label="Mumbai"
               {...a11yProps(1)}
               sx={{
                 fontWeight: "600",
@@ -121,7 +145,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="EU"
+              label="HYD"
               {...a11yProps(2)}
               sx={{
                 fontWeight: "600",
@@ -130,7 +154,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="UK"
+              label="Chennai"
               {...a11yProps(3)}
               sx={{
                 fontWeight: "600",
@@ -139,7 +163,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="Coming soon.."
+              label="Pune"
               {...a11yProps(4)}
               sx={{
                 fontWeight: "600",
@@ -147,147 +171,47 @@ export default function Section5() {
                 letterSpacing: "-1px",
               }}
             />
+            <Tab
+              label="Coming soon.."
+              {...a11yProps(5)}
+              sx={{
+                fontWeight: "600",
+                fontSize: "1.25em",
+                letterSpacing: "-1px",
+              }}
+            />
           </Tabs>
+
           <TabPanel value={value} index={0}>
-            <Card sx={{ display: "flex", marginTop: "5px" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    New York, USA
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Opening soon on IMPERIAL LAKE DR BRAMPTON, ON L6P 2V3
-                  </Typography>
-                </CardContent>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Pennstate, USA
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Opening soon on Harrisburg, PA, United States | Closes 5 pm
-                    On-site services
-                  </Typography>
-                </CardContent>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-                ></Box>
-              </Box>
-            </Card>
+            <CustomCard
+              content1="Green Park Extension, New Delhi, Delhi 110016"
+              content2="MOHAN SINGH MARKET, D-9, Ranji Nagar, Sector 6, RKPURAM, New Delhi, 110022"
+            />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <Card sx={{ display: "flex", marginTop: "5px" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Hyderabad, India
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Near Metro station, Jubilee Hills, Hyderabad, Telangana
-                  </Typography>
-                </CardContent>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Chennai, Tamilnadu, India
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Opening soon in Chennai
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+            <CustomCard
+              content1="
+          Navpada, Vile Parle East, Vile Parle, Mumbai,
+                    Maharashtra 400047"
+              content2="Vishnu Prasad Society, Mumbai, Maharashtra 400057"
+            />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <Card sx={{ display: "flex", marginTop: "5px" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Collaboration with <b>United Parcel Service</b>
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Germany
-                  </Typography>
-                </CardContent>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Collabartion with <b>FedEx</b> updates soon..
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  ></Typography>
-                </CardContent>
-              </Box>
-            </Card>
+            <CustomCard
+              content1="Parvathi Nagar, Madhapur
+              Hyderabad, Telangana 500018"
+              content2="Phase I, Kukatpally, Hyderabad, Telangana 500085"
+            />
           </TabPanel>
-          <TabPanel value={value} index={3}>
-            <Card sx={{ display: "flex", marginTop: "5px" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Opening soon
-                  </Typography>
-                </CardContent>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Opening soon
-                  </Typography>
 
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Opening soon in London
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+          <TabPanel value={value} index={3}>
+            <CustomCard content1="Chennai" content2="Opening soon" />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <Card sx={{ display: "flex", marginTop: "5px" }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <CardContent sx={{ flex: "1 0 auto" }}>
-                  <Typography component="div" variant="h5">
-                    Coming soon in other areas,
-                  </Typography>
-
-                  <Typography
-                    variant="subtitle1"
-                    color="text.secondary"
-                    component="div"
-                  >
-                    Until we reach last mile on this planet..
-                  </Typography>
-                </CardContent>
-              </Box>
-            </Card>
+            <CustomCard content1="Pune" content2="Opening soon" />
+          </TabPanel>
+          <TabPanel value={value} index={5}>
+            <CustomCard content1="Opening soon" content2="More Braches Soon" />
           </TabPanel>
         </Box>
       </Box>
