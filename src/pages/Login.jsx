@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import LockIcon from "@mui/icons-material/Lock";
-import { email, required } from "../components/Auth/FormValidation";
+import { validEmail, required } from "../components/Auth/FormValidation";
 import RFTextField from "../components/Auth/CustomFields/RTTextField";
 import FormButton from "../components/Auth/FormButton";
 import FormFeedback from "../components/Auth/FormFeedback";
@@ -10,6 +10,7 @@ import { Avatar, Box, Typography } from "@mui/material";
 import LoginForm from "../components/Auth/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
 import { Link } from "react-router-dom";
+import OnChange from "../components/Auth/onChange";
 
 const CustomLink = ({ to, name }) => {
   return (
@@ -26,16 +27,22 @@ function Login() {
     const errors = required(["email", "password"], values);
 
     if (!errors.email) {
-      const emailError = email(values.email);
-      if (emailError) {
-        errors.email = emailError;
+      const validEmailError = validEmail(values.email);
+      if (validEmailError) {
+        errors.email = validEmailError;
       }
     }
     return errors;
   };
 
-  const handleSubmit = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
     setSent(true);
+    console.log(formData);
   };
 
   return (
@@ -84,6 +91,15 @@ function Login() {
                 required
                 size="large"
               />
+              <OnChange
+                name="email"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["email"]: val,
+                  })
+                }
+              />
               <Field
                 fullWidth
                 size="large"
@@ -95,6 +111,15 @@ function Login() {
                 label="Password"
                 type="password"
                 margin="normal"
+              />
+              <OnChange
+                name="password"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["password"]: val,
+                  })
+                }
               />
               <FormSpy subscription={{ submitError: true }}>
                 {({ submitError }) =>

@@ -4,7 +4,7 @@ function isEmail(string) {
   return re.test(string);
 }
 
-export function email(value) {
+export function validEmail(value) {
   return value && !isEmail(value.trim()) ? "Invalid email" : null;
 }
 
