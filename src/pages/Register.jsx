@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import Navbar from "../components/LandingPage/Navbar";
-import { email, required } from "../components/Auth/FormValidation";
+import { validEmail, required } from "../components/Auth/FormValidation";
 import FormButton from "../components/Auth/FormButton";
 import FormFeedback from "../components/Auth/FormFeedback";
 import withRoot from "../components/Auth/withRoot";
@@ -9,31 +9,37 @@ import RegisterForm from "../components/Auth/RegisterForm";
 import RTPhoneField from "../components/Auth/CustomFields/RTPhoneField";
 import RTPasswordField from "../components/Auth/CustomFields/RTPasswordField";
 import RFTextField from "../components/Auth/CustomFields/RTTextField";
-
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import OnChange from "../components/Auth/onChange";
 
 function Register() {
   const [sent, setSent] = useState(false);
-
   const validate = (values) => {
     const errors = required(
-      ["email", "username", "phonenumber", "password"],
+      ["username", "phonenumber", "email", "password"],
       values
     );
 
     if (!errors.email) {
-      const emailError = email(values.email);
-      if (emailError) {
-        errors.email = emailError;
+      const validEmailError = validEmail(values.email);
+      if (validEmailError) {
+        errors.email = validEmailError;
       }
     }
-
     return errors;
   };
 
-  const handleSubmit = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    phonenumber: "",
+    password: "",
+  });
+
+  const handleSubmit = (e) => {
     setSent(true);
+    console.log(formData);
   };
 
   return (
@@ -82,6 +88,15 @@ function Register() {
                 name="username"
                 required
               />
+              <OnChange
+                name="username"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["username"]: val,
+                  })
+                }
+              />
               <Field
                 autoComplete="email"
                 component={RFTextField}
@@ -92,6 +107,15 @@ function Register() {
                 name="email"
                 required
               />
+              <OnChange
+                name="email"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["email"]: val,
+                  })
+                }
+              />
               <Field
                 component={RTPhoneField}
                 fullWidth
@@ -101,7 +125,15 @@ function Register() {
                 name="phonenumber"
                 margin="normal"
               />
-
+              <OnChange
+                name="phonenumber"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["phonenumber"]: val,
+                  })
+                }
+              />
               <Field
                 component={RTPasswordField}
                 disabled={submitting || sent}
@@ -110,6 +142,15 @@ function Register() {
                 name="password"
                 label="Password"
                 notched="true"
+              />
+              <OnChange
+                name="password"
+                onChange={(val, prev) =>
+                  setFormData({
+                    ...formData,
+                    ["password"]: val,
+                  })
+                }
               />
 
               <FormSpy subscription={{ submitError: true }}>

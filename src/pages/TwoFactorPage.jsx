@@ -4,7 +4,6 @@ import KeyIcon from "@mui/icons-material/Key";
 import FormButton from "../components/Auth/FormButton";
 import FormFeedback from "../components/Auth/FormFeedback";
 import withRoot from "../components/Auth/withRoot";
-import { email, required } from "../components/Auth/FormValidation";
 import { Avatar, Box, Link, Typography } from "@mui/material";
 import LoginForm from "../components/Auth/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
@@ -18,20 +17,9 @@ function TwoFactorPage() {
     setOtp(newValue);
   };
 
-  const validate = (values) => {
-    const errors = required(["email", "password"], values);
-
-    if (!errors.email) {
-      const emailError = email(values.email);
-      if (emailError) {
-        errors.email = emailError;
-      }
-    }
-    return errors;
-  };
-
   const handleSubmit = () => {
     setSent(true);
+    // console.log(otp);
   };
 
   return (
@@ -50,11 +38,7 @@ function TwoFactorPage() {
           You've added an extra-layer of security for your account.
         </Typography>
 
-        <Form
-          onSubmit={handleSubmit}
-          subscription={{ submitting: true }}
-          validate={validate}
-        >
+        <Form onSubmit={handleSubmit} subscription={{ submitting: true }}>
           {({ handleSubmit: handleSubmit2, submitting }) => (
             <Box component="form" onSubmit={handleSubmit2} sx={{ mt: 1 }}>
               <MuiOtpInput
@@ -62,6 +46,7 @@ function TwoFactorPage() {
                 onChange={handleChange}
                 required
                 size="small"
+                length={6}
               />
 
               <FormSpy subscription={{ submitError: true }}>
