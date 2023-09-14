@@ -12,12 +12,14 @@ import RFTextField from "../components/Auth/CustomFields/RTTextField";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import OnChange from "../components/Auth/onChange";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser, registerUserThunk } from "../store";
 
 function Register() {
   const [sent, setSent] = useState(false);
   const validate = (values) => {
     const errors = required(
-      ["username", "phonenumber", "email", "password"],
+      ["username", "phone_number", "email", "password"],
       values
     );
 
@@ -30,16 +32,43 @@ function Register() {
     return errors;
   };
 
+  const dispatch = useDispatch();
+  const { isRegistered, isLoading, error } = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    phonenumber: "",
+    phone_number: "",
     password: "",
   });
 
   const handleSubmit = (e) => {
     setSent(true);
-    console.log(formData);
+    const action = registerUserThunk(formData);
+    // const action = registerUser(formData);
+    dispatch(action);
+    // console.log(formData);
+  };
+
+  const getErrorMsg = (error) => {
+    if (!error) {
+      return "";
+    }
+
+    const errorMsgs = [];
+
+    for (const field in error) {
+      errorMsgs.push(error[field]);
+    }
+    let errorMsg = errorMsgs.join(", ");
+
+    return (
+      <Box align="center">
+        <Typography mt={1} letterSpacing="-0.5px">
+          {errorMsg}
+        </Typography>
+      </Box>
+    );
   };
 
   return (
@@ -81,7 +110,7 @@ function Register() {
                 autoFocus
                 variant="outlined"
                 component={RFTextField}
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 autoComplete="given-name"
                 fullWidth
                 label="Username"
@@ -100,7 +129,7 @@ function Register() {
               <Field
                 autoComplete="email"
                 component={RFTextField}
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 fullWidth
                 label="Email"
                 margin="normal"
@@ -119,24 +148,24 @@ function Register() {
               <Field
                 component={RTPhoneField}
                 fullWidth
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 required
                 label="Phone Number"
-                name="phonenumber"
+                name="phone_number"
                 margin="normal"
               />
               <OnChange
-                name="phonenumber"
+                name="phone_number"
                 onChange={(val, prev) =>
                   setFormData({
                     ...formData,
-                    ["phonenumber"]: val,
+                    ["phone_number"]: val,
                   })
                 }
               />
               <Field
                 component={RTPasswordField}
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 fullWidth
                 required
                 name="password"
@@ -162,13 +191,23 @@ function Register() {
                   ) : null
                 }
               </FormSpy>
+              {isRegistered ? (
+                <Box align="center">
+                  <Typography mt={1} letterSpacing="-0.5px">
+                    Account created successfully, now login into your account
+                  </Typography>
+                </Box>
+              ) : (
+                ""
+              )}
+              {error ? getErrorMsg(error) : ""}
               <Box align="center">
                 <FormButton
                   sx={{ mt: 3, mb: 2 }}
-                  disabled={submitting || sent}
+                  disabled={submitting || (sent && !error)}
                   color="primary"
                 >
-                  {submitting || sent ? "In progress…" : "Register"}
+                  {submitting || (sent && !error) ? "In progress…" : "Register"}
                 </FormButton>
               </Box>
             </Box>

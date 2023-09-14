@@ -1,7 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { registerUser, userReducer } from "./slices/AuthSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    user: userReducer,
+  },
 });
 
-export { store };
+export { store, registerUser };
+console.log(store.getState());
+export * from "./thunks/registerUser";
