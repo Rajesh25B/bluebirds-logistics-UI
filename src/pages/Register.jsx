@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import Navbar from "../components/LandingPage/Navbar";
-import { validEmail, required } from "../components/Auth/FormValidation";
-import FormButton from "../components/Auth/FormButton";
-import FormFeedback from "../components/Auth/FormFeedback";
-import withRoot from "../components/Auth/withRoot";
-import RegisterForm from "../components/Auth/RegisterForm";
-import RTPhoneField from "../components/Auth/CustomFields/RTPhoneField";
-import RTPasswordField from "../components/Auth/CustomFields/RTPasswordField";
-import RFTextField from "../components/Auth/CustomFields/RTTextField";
+import { validEmail, required } from "../components/Form/FormValidation";
+import FormButton from "../components/Form/FormButton";
+import FormFeedback from "../components/Form/FormFeedback";
+import withRoot from "../components/Form/withRoot";
+import RegisterForm from "../components/Form/RegisterForm";
+import RTPhoneField from "../components/Form/CustomFields/RTPhoneField";
+import RTPasswordField from "../components/Form/CustomFields/RTPasswordField";
+import RFTextField from "../components/Form/CustomFields/RTTextField";
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import OnChange from "../components/Auth/onChange";
+import OnChange from "../components/Form/onChange";
 import { useDispatch, useSelector } from "react-redux";
-import { registerUser, registerUserThunk } from "../store";
+import { registerUserThunk } from "../store";
 
 function Register() {
   const [sent, setSent] = useState(false);

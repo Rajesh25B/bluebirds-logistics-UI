@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import LockIcon from "@mui/icons-material/Lock";
-import { validEmail, required } from "../components/Auth/FormValidation";
-import RFTextField from "../components/Auth/CustomFields/RTTextField";
-import FormButton from "../components/Auth/FormButton";
-import FormFeedback from "../components/Auth/FormFeedback";
-import withRoot from "../components/Auth/withRoot";
+import { validEmail, required } from "../components/Form/FormValidation";
+import RFTextField from "../components/Form/CustomFields/RTTextField";
+import FormButton from "../components/Form/FormButton";
+import FormFeedback from "../components/Form/FormFeedback";
+import withRoot from "../components/Form/withRoot";
 import { Avatar, Box, Typography } from "@mui/material";
-import LoginForm from "../components/Auth/LoginForm";
+import LoginForm from "../components/Form/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
-import { Link } from "react-router-dom";
-import OnChange from "../components/Auth/onChange";
+import { Link, Navigate } from "react-router-dom";
+import OnChange from "../components/Form/onChange";
+import { loginThunk } from "../store/thunks/loginThunk";
+import { useDispatch, useSelector } from "react-redux";
 
 const CustomLink = ({ to, name }) => {
   return (
@@ -35,15 +37,51 @@ function Login() {
     return errors;
   };
 
-  const [formData, setFormData] = useState({
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
 
+  const { isAuthenticated, isLoading, error } = useSelector(
+    (state) => state.user
+  );
+
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     setSent(true);
-    console.log(formData);
+    // setLoginData(loginData);
+    const action = loginThunk(loginData);
+    // const action = registerUser(formData);
+    dispatch(action);
   };
+
+  const getErrorMsg = (error) => {
+    if (!error) {
+      return "";
+    }
+
+    const errorMsgs = [];
+    let msg = "";
+
+    for (const field in error) {
+      msg += `${field}: ${error[field]}`;
+      console.log(msg);
+      errorMsgs.push(error[field]);
+    }
+
+    let errorMsg = errorMsgs.join(", ");
+
+    return (
+      <Box align="center">
+        <Typography mt={1} letterSpacing="-0.5px">
+          {msg}
+        </Typography>
+      </Box>
+    );
+  };
+
+  if (isAuthenticated) return <Navigate to="/customer/home/" />;
 
   return (
     <>
@@ -83,7 +121,7 @@ function Login() {
                 autoComplete="email"
                 autoFocus
                 component={RFTextField}
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 fullWidth
                 label="Email"
                 margin="normal"
@@ -94,8 +132,8 @@ function Login() {
               <OnChange
                 name="email"
                 onChange={(val, prev) =>
-                  setFormData({
-                    ...formData,
+                  setLoginData({
+                    ...loginData,
                     ["email"]: val,
                   })
                 }
@@ -104,7 +142,7 @@ function Login() {
                 fullWidth
                 size="large"
                 component={RFTextField}
-                disabled={submitting || sent}
+                disabled={submitting || (sent && !error)}
                 required
                 name="password"
                 autoComplete="current-password"
@@ -115,8 +153,8 @@ function Login() {
               <OnChange
                 name="password"
                 onChange={(val, prev) =>
-                  setFormData({
-                    ...formData,
+                  setLoginData({
+                    ...loginData,
                     ["password"]: val,
                   })
                 }
@@ -130,13 +168,14 @@ function Login() {
                   ) : null
                 }
               </FormSpy>
+              {error ? getErrorMsg(error) : ""}
               <Box align="center">
                 <FormButton
                   sx={{ mt: 3, mb: 2 }}
-                  disabled={submitting || sent}
+                  disabled={submitting || (sent && !error)}
                   color="primary"
                 >
-                  {submitting || sent ? "Logging in…" : "LOGIN"}
+                  {submitting || (sent && error) ? "Logging in…" : "LOGIN"}
                 </FormButton>
               </Box>
             </Box>
