@@ -9,6 +9,8 @@ import TwoFactorPage from "./pages/TwoFactorPage.jsx";
 import { Provider } from "react-redux";
 import { store } from "./store/index.jsx";
 
+import { Home, Profile } from "./components/Dashboards/Customer/index.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const router = createBrowserRouter([
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
   {
     path: "two-factor/",
     element: <TwoFactorPage />,
+  },
+  {
+    path: "customer/home/",
+    element: <Home />,
+  },
+  {
+    path: "customer/profile/",
+    element: <Profile />,
   },
   // {
   //   path: "track-package/",

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Form, FormSpy } from "react-final-form";
 import KeyIcon from "@mui/icons-material/Key";
-import FormButton from "../components/Auth/FormButton";
-import FormFeedback from "../components/Auth/FormFeedback";
-import withRoot from "../components/Auth/withRoot";
+import FormButton from "../components/Form/FormButton";
+import FormFeedback from "../components/Form/FormFeedback";
+import withRoot from "../components/Form/withRoot";
 import { Avatar, Box, Link, Typography } from "@mui/material";
-import LoginForm from "../components/Auth/LoginForm";
+import LoginForm from "../components/Form/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
 import { MuiOtpInput } from "mui-one-time-password-input";
 

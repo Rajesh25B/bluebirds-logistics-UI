@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material/styles";
 import {
   AppBar,
   Box,
+  Button,
   IconButton,
   Menu,
   MenuItem,
@@ -9,12 +10,13 @@ import {
   Toolbar,
 } from "@mui/material";
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
 import MainLogo from "/src/assets/styles/svg/MainLogo";
 import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
-import { CustomButtonRoute } from "../../routes/CustomButtonRoute";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserThunk, logoutThunk } from "../../../store";
+import { CustomButtonRoute } from "../../../routes/CustomButtonRoute";
 
 const theme = createTheme({
   palette: {
@@ -31,6 +33,8 @@ const CustomToolbar = styled(Toolbar)({
 });
 
 function Navbar() {
+  const dispatch = useDispatch();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -41,6 +45,35 @@ function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const authLinks = (
+    <>
+      <CustomButtonRoute
+        to={`/customer/home/`}
+        name="Home"
+        onclick={() => dispatch(getUserThunk())}
+      />
+      <CustomButtonRoute
+        to={`/customer/profile/`}
+        name="Profile"
+        // onclick={() => dispatch(getUserThunk())}
+      />
+      <CustomButtonRoute
+        to={`/`}
+        name="Logout"
+        // onclick={() => dispatch(getUserThunk())}
+      />
+      {/* <Button color="inherit" onClick={() => dispatch(logoutThunk())}>
+        <Box
+          component="a"
+          href="/"
+          style={{ color: "inherit", textDecoration: "inherit" }}
+        >
+          Logout
+        </Box>
+      </Button> */}
+    </>
+  );
 
   return (
     <>
@@ -63,7 +96,7 @@ function Navbar() {
                 variant="text"
                 disableRipple
               >
-                <Link to={`/`}>
+                <Link to={`/customer/home/`}>
                   <MainLogo />
                 </Link>
               </IconButton>
@@ -77,27 +110,7 @@ function Navbar() {
                 paddingLeft: { xs: "none", sm: "none", md: 30, lg: 60 },
               }}
             >
-              <CustomButtonRoute to={`/track/`} name="Track your package" />
-              <CustomButtonRoute to={`/about/`} name="About" />
-              <CustomButtonRoute to={`/services/`} name="Services" />
-              <Button color="inherit" onClick={onclick}>
-                <Box
-                  component="a"
-                  href="/login/"
-                  style={{ color: "inherit", textDecoration: "inherit" }}
-                >
-                  Login
-                </Box>
-              </Button>
-              <Button color="inherit" onClick={onclick}>
-                <Box
-                  component="a"
-                  href="/register/"
-                  style={{ color: "inherit", textDecoration: "inherit" }}
-                >
-                  Register
-                </Box>
-              </Button>
+              {authLinks}
             </Stack>
 
             <IconButton
@@ -128,19 +141,10 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/track/`} name="Track your package" />
+                <CustomButtonRoute to={`/customer/home/`} name="Home" />
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/about/`} name="About" />
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/services/`} name="Services" />
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/login/`} name="Login" />
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/register/`} name="Register" />
+                <CustomButtonRoute to={`/`} name="Logout" />
               </MenuItem>
             </Menu>
           </CustomToolbar>
@@ -149,5 +153,4 @@ function Navbar() {
     </>
   );
 }
-
-export default Navbar;
+export { Navbar };
