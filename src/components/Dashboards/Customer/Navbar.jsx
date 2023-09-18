@@ -61,17 +61,8 @@ function Navbar() {
       <CustomButtonRoute
         to={`/`}
         name="Logout"
-        // onclick={() => dispatch(getUserThunk())}
+        onclick={() => dispatch(logoutThunk())}
       />
-      {/* <Button color="inherit" onClick={() => dispatch(logoutThunk())}>
-        <Box
-          component="a"
-          href="/"
-          style={{ color: "inherit", textDecoration: "inherit" }}
-        >
-          Logout
-        </Box>
-      </Button> */}
     </>
   );
 
