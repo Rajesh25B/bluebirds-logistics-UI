@@ -66,7 +66,10 @@ function Login() {
 
     for (const field in error) {
       msg += `${field}: ${error[field]}`;
-      console.log(msg);
+      if (msg.includes("header")) {
+        msg = "";
+      }
+
       errorMsgs.push(error[field]);
     }
 

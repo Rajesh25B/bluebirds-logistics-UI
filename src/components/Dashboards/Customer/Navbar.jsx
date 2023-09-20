@@ -59,7 +59,8 @@ function Navbar() {
         // onclick={() => dispatch(getUserThunk())}
       />
       <CustomButtonRoute
-        to={`/`}
+        reloadDocument={true}
+        to={`/login/`}
         name="Logout"
         onclick={() => dispatch(logoutThunk())}
       />

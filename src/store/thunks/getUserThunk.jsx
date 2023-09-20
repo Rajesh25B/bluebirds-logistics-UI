@@ -6,7 +6,6 @@ const getUserThunk = createAsyncThunk("users/me", async (_, thunkAPI) => {
     const response = await client.get("/customer/me/");
 
     if (response.status === 200) {
-      // console.log(response.data);
       return response.data;
     } else {
       return thunkAPI.rejectWithValue(response.data);
