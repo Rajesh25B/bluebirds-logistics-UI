@@ -12,8 +12,11 @@ const loginThunk = createAsyncThunk(
       const refresh = response["data"]["refresh"];
 
       if (response.status === 200) {
-        document.cookie = `access_token=${access}; Secure;`;
-        document.cookie = `refresh_token=${refresh}; Secure;`;
+        const accessExpires = new Date(Date.now() + 20 * 60 * 1000);
+        const refreshExpires = new Date(Date.now() + 5 * 60 * 60 * 1000);
+
+        document.cookie = `access_token=${access}; Secure; expires=${accessExpires.toUTCString()}`;
+        document.cookie = `refresh_token=${refresh}; Secure; expires=${refreshExpires.toUTCString()}`;
         // max-age=60*2;
         const { dispatch } = thunkAPI;
         dispatch(getUserThunk());

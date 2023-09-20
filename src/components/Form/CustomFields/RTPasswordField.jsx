@@ -44,9 +44,9 @@ function RFPasswordField(props) {
             </InputAdornment>
           ),
         }}
-        helperText={
-          "Password must be 8 characters length, contains one capital letter, one digit, one special character"
-        }
+        // helperText={
+        //   "Password must be 8 characters length, contains one capital letter, one digit, one special character"
+        // }
         variant="outlined"
       />
     </Box>

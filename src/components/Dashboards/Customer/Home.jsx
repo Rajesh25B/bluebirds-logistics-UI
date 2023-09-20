@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk } from "../../../store/thunks/getUserThunk";
 
@@ -18,13 +18,13 @@ export const Home = () => {
     dispatch(getUserThunk());
   }, []);
 
-  if (error) return <Navigate to="/" />;
+  if (!isAuthenticated) return <Navigate to="/login/" />;
 
   return (
     <>
       <Navbar />
       <Box mt={15} align="center">
-        {isLoading ? "" : `WELCOME ${user.username}`}
+        {isLoading ? <CircularProgress /> : `WELCOME ${user.username}`}
       </Box>
     </>
   );

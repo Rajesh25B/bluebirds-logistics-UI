@@ -17,7 +17,6 @@ function getRefreshToken() {
   for (const cookie of cookies) {
     const [name, value] = cookie.trim().split("=");
     if (name === "refresh_token") {
-      console.log(value);
       return value;
     }
   }
@@ -39,19 +38,26 @@ const client = axios.create({
 
 client.interceptors.request.use(async (config) => {
   const accessToken = getAccessToken();
-  if (accessToken) {
-    config.headers.Authorization = `Bearer ${accessToken}`;
+  // If the access token is not available in memory, check for it in the cookies.
+  if (!accessToken) {
+    const accessTokenCookie = document.cookie.match(/accessToken=([^;]+)/);
+    if (accessTokenCookie) {
+      accessToken = accessTokenCookie[1];
+    }
   }
+  config.headers.Authorization = `Bearer ${accessToken}`;
   return config;
 });
 
 async function refreshAccessToken() {
   const refreshToken =
     getRefreshToken(); /* Get the refresh token from your cookies or storage */
+  console.log(refreshToken);
   try {
     const response = await client.post("/token/refresh/", {
       refresh: refreshToken,
     });
+    console.log(response);
     const newAccessToken = response.data.access;
     // Update the access token in your cookies or storage
     // For example, you can use the same `document.cookie` approach
@@ -77,7 +83,8 @@ client.interceptors.response.use(
       } catch (refreshError) {
         // Handle the error when refresh fails
         // For example, you can redirect the user to the login page
-        console.error("Refresh failed:", refreshError);
+        // console.error("Refresh failed:", refreshError);
+        console.log(refreshError);
         // Handle the error or redirect to the login page
       }
     }
