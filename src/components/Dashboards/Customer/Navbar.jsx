@@ -8,6 +8,7 @@ import {
   MenuItem,
   Stack,
   Toolbar,
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import MainLogo from "/src/assets/styles/svg/MainLogo";
@@ -17,6 +18,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, logoutThunk } from "../../../store";
 import { CustomButtonRoute } from "../../../routes/CustomButtonRoute";
+import Modal from "../../Modal";
 
 const theme = createTheme({
   palette: {
@@ -34,7 +36,6 @@ const CustomToolbar = styled(Toolbar)({
 
 function Navbar() {
   const dispatch = useDispatch();
-
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -44,6 +45,12 @@ function Navbar() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const onClose = () => {
+    setOpenModal(false);
   };
 
   const authLinks = (
@@ -56,19 +63,44 @@ function Navbar() {
       <CustomButtonRoute
         to={`/customer/profile/`}
         name="Profile"
-        // onclick={() => dispatch(getUserThunk())}
+        onclick={() => dispatch(getUserThunk())}
       />
-      <CustomButtonRoute
+      {/* <CustomButtonRoute
         reloadDocument={true}
         to={`/login/`}
         name="Logout"
         onclick={() => dispatch(logoutThunk())}
-      />
+      /> */}
+      <Button color="inherit" onClick={() => setOpenModal(true)}>
+        Logout
+      </Button>
     </>
+  );
+
+  const logoutModalButton = (
+    <Button variant="contained" onClick={() => dispatch(logoutThunk())}>
+      Logout
+    </Button>
+  );
+  const goBackModalButton = (
+    <Button variant="contained" onClick={() => setOpenModal(false)}>
+      GO BACK
+    </Button>
+  );
+
+  const modal = (
+    <Modal
+      close={onClose}
+      actionBar={logoutModalButton}
+      backBtn={goBackModalButton}
+    >
+      <Typography variant="h6">Are you sure to logout?</Typography>
+    </Modal>
   );
 
   return (
     <>
+      {openModal && modal}
       <Box>
         <AppBar
           theme={theme}
@@ -136,7 +168,10 @@ function Navbar() {
                 <CustomButtonRoute to={`/customer/home/`} name="Home" />
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/`} name="Logout" />
+                <CustomButtonRoute
+                  name="Logout"
+                  onclick={() => setOpenModal(true)}
+                />
               </MenuItem>
             </Menu>
           </CustomToolbar>
