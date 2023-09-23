@@ -80,7 +80,16 @@ function Navbar() {
               <CustomButtonRoute to={`/track/`} name="Track your package" />
               <CustomButtonRoute to={`/about/`} name="About" />
               <CustomButtonRoute to={`/services/`} name="Services" />
-              <CustomButtonRoute to={`/login/`} name="Login" />
+              {/* <CustomButtonRoute to={`/login/`} name="Login" /> */}
+              <Button color="inherit" onClick={onclick}>
+                <Box
+                  component="a"
+                  href="/login/"
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                >
+                  Login
+                </Box>
+              </Button>
               <CustomButtonRoute to={`/register/`} name="Register" />
               {/* <Button color="inherit" onClick={onclick}>
                 <Box

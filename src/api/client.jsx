@@ -37,7 +37,7 @@ const client = axios.create({
 });
 
 client.interceptors.request.use(async (config) => {
-  const accessToken = getAccessToken();
+  let accessToken = getAccessToken();
   // If the access token is not available in memory, check for it in the cookies.
   if (!accessToken) {
     const accessTokenCookie = document.cookie.match(/accessToken=([^;]+)/);
