@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import MainLogo from "/src/assets/styles/svg/MainLogo";
 import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk, logoutThunk } from "../../../store";
 import { CustomButtonRoute } from "../../../routes/CustomButtonRoute";
@@ -36,6 +36,8 @@ const CustomToolbar = styled(Toolbar)({
 
 function Navbar() {
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.user);
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -71,7 +73,12 @@ function Navbar() {
         name="Logout"
         onclick={() => dispatch(logoutThunk())}
       /> */}
-      <Button color="inherit" onClick={() => setOpenModal(true)}>
+      <Button
+        color="inherit"
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
         Logout
       </Button>
     </>
@@ -97,7 +104,7 @@ function Navbar() {
       <Typography variant="h6">Are you sure to logout?</Typography>
     </Modal>
   );
-
+  if (!isAuthenticated) return <Navigate to="/login/" />;
   return (
     <>
       {openModal && modal}

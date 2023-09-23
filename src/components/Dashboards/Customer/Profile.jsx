@@ -73,11 +73,7 @@ export function Profile() {
     }
   };
 
-  if (!isAuthenticated && !user)
-    return <Navigate to="/login/" reloadDocument />;
-  // if (!isAuthenticated && !user) {
-  //   navigate("/login/", { replace: true });
-  // }
+  if (!isAuthenticated) return <Navigate to="/login/" />;
 
   return (
     <>

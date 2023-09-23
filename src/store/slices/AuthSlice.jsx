@@ -4,6 +4,7 @@ import { loginThunk } from "../thunks/loginThunk";
 import { getUserThunk } from "../thunks/getUserThunk";
 import { logoutThunk } from "../thunks/logoutThunk";
 import { updateProfileThunk } from "../thunks/updateProfileThunk";
+import { twoFactorLoginThunk } from "../thunks/twoFactorLoginThunk";
 
 const AuthSlice = createSlice({
   name: "auth",
@@ -14,6 +15,7 @@ const AuthSlice = createSlice({
     isLoading: false,
     error: null,
     status: "idle",
+    is_2fa_enabled: null,
   },
   reducers: {
     // registerUser(state, action) {
@@ -68,6 +70,7 @@ const AuthSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
       state.error = null;
+      state.is_2fa_enabled = false;
     });
     builder.addCase(logoutThunk.rejected, (state, action) => {
       state.isLoading = false;
@@ -83,6 +86,20 @@ const AuthSlice = createSlice({
       state.error = null;
     });
     builder.addCase(updateProfileThunk.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    });
+    builder.addCase(twoFactorLoginThunk.pending, (state, action) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    builder.addCase(twoFactorLoginThunk.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isAuthenticated = false;
+      state.user = action.payload;
+      state.is_2fa_enabled = action.payload.is_2fa_enabled;
+    });
+    builder.addCase(twoFactorLoginThunk.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     });
