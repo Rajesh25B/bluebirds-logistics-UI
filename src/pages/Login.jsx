@@ -59,13 +59,13 @@ function Login() {
   };
 
   useEffect(() => {
-    console.log("useEffect is running");
+    // console.log("useEffect is running");
     if (is_2fa_enabled === false) {
-      console.log("useEffect is running 1");
+      // console.log("useEffect is running 1");
       dispatch(loginThunk(loginData));
     } else if (is_2fa_enabled === true) {
       // Redirect to the 2FA verification page
-      console.log("useEffect is running 2");
+      // console.log("useEffect is running 2");
       navigate("/two-factor/", { replace: true }, { data: loginData });
     } else {
       // Handle the case where is_2fa_enabled is neither true nor false

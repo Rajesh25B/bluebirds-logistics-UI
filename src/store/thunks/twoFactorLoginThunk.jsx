@@ -9,7 +9,7 @@ const twoFactorLoginThunk = createAsyncThunk(
         "http://127.0.0.1:8000/api/customer/verify-email-2fa/",
         { email: loginData["email"] }
       );
-      console.log(loginData);
+      // console.log(loginData);
       if (response.status === 200) {
         // console.log({ ...response.data, ...loginData });
         response.data = { ...response.data, ...loginData };
