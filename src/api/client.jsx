@@ -25,7 +25,7 @@ function getRefreshToken() {
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 // Create an Axios instance with a base URL and other configurations
 const client = axios.create({
@@ -37,7 +37,7 @@ const client = axios.create({
 });
 
 client.interceptors.request.use(async (config) => {
-  const accessToken = getAccessToken();
+  let accessToken = getAccessToken();
   // If the access token is not available in memory, check for it in the cookies.
   if (!accessToken) {
     const accessTokenCookie = document.cookie.match(/accessToken=([^;]+)/);

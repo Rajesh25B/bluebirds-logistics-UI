@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
 import LockIcon from "@mui/icons-material/Lock";
 import { validEmail, required } from "../components/Form/FormValidation";
@@ -6,13 +6,15 @@ import RFTextField from "../components/Form/CustomFields/RTTextField";
 import FormButton from "../components/Form/FormButton";
 import FormFeedback from "../components/Form/FormFeedback";
 import withRoot from "../components/Form/withRoot";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import LoginForm from "../components/Form/LoginForm";
 import Navbar from "../components/LandingPage/Navbar";
 import { Link, Navigate } from "react-router-dom";
 import OnChange from "../components/Form/onChange";
 import { loginThunk } from "../store/thunks/loginThunk";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { twoFactorLoginThunk } from "../store/thunks/twoFactorLoginThunk";
 
 const CustomLink = ({ to, name }) => {
   return (
@@ -42,19 +44,34 @@ function Login() {
     password: "",
   });
 
-  const { isAuthenticated, isLoading, error } = useSelector(
+  const { isAuthenticated, isLoading, error, is_2fa_enabled } = useSelector(
     (state) => state.user
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     setSent(true);
-    // setLoginData(loginData);
-    const action = loginThunk(loginData);
-    // const action = registerUser(formData);
+
+    const action = twoFactorLoginThunk(loginData);
     dispatch(action);
   };
+
+  useEffect(() => {
+    // console.log("useEffect is running");
+    if (is_2fa_enabled === false) {
+      // console.log("useEffect is running 1");
+      dispatch(loginThunk(loginData));
+    } else if (is_2fa_enabled === true) {
+      // Redirect to the 2FA verification page
+      // console.log("useEffect is running 2");
+      navigate("/two-factor/", { replace: true }, { data: loginData });
+    } else {
+      // Handle the case where is_2fa_enabled is neither true nor false
+      navigate("/login/", { replace: true });
+    }
+  }, [is_2fa_enabled]);
 
   const getErrorMsg = (error) => {
     if (!error) {
@@ -171,7 +188,10 @@ function Login() {
                   ) : null
                 }
               </FormSpy>
-              {error ? getErrorMsg(error) : ""}
+              <Box align="center">
+                {error ? getErrorMsg(error) : ""}
+                {isLoading ? <CircularProgress color="secondary" /> : ""}
+              </Box>
               <Box align="center">
                 <FormButton
                   sx={{ mt: 3, mb: 2 }}
