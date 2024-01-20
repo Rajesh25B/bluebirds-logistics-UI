@@ -19,6 +19,8 @@ export const Home = () => {
     dispatch(getUserThunk());
   }, []);
 
+  if (!isAuthenticated) return <Navigate to="/login/" />;
+
   return (
     <>
       <Navbar />

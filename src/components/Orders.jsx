@@ -22,30 +22,73 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
-function createData(name, cost, orderId, createdOn, status) {
+function createData(id, cost, createdOn, deliveredOn, destination, status) {
   return {
-    name,
+    id,
     cost,
-    orderId,
     createdOn,
+    deliveredOn,
+    destination,
     status,
   };
 }
 
 const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
+  createData(
+    "1300141366124",
+    305,
+    "05/09/2023",
+    "08/09/2023",
+    "HYDERABAD",
+    "DELIVERED"
+  ),
+  createData(
+    "9911381561392",
+    452,
+    "05/09/2023",
+    "09/09/2023",
+    "DELHI",
+    "DELIVERED"
+  ),
+  createData(
+    "1210033930001",
+    262,
+    "04/09/2023",
+    "06/09/2023",
+    "KARIMNAGAR",
+    "DELIVERED"
+  ),
+  createData(
+    "0712100793253",
+    159,
+    "04/09/2023",
+    "07/09/2023",
+    "BANGALORE",
+    "DELIVERED"
+  ),
+  createData(
+    "9521061135485",
+    356,
+    "03/09/2023",
+    "10/09/2023",
+    "CHENNAI",
+    "DELIVERED"
+  ),
+  createData(
+    "1067061411730",
+    408,
+    "14/08/2023",
+    "25/08/2023",
+    "HYDERABAD",
+    "DELIVERED"
+  ),
+  // createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  // createData("Jelly Bean", 375, 0.0, 94, 0.0),
+  // createData("KitKat", 518, 26.0, 65, 7.0),
+  // createData("Lollipop", 392, 0.2, 98, 0.0),
+  // createData("Marshmallow", 318, 0, 81, 2.0),
+  // createData("Nougat", 360, 19.0, 9, 37.0),
+  // createData("Oreo", 437, 18.0, 63, 4.0),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -82,34 +125,40 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "name",
-    numeric: false,
+    id: "id",
+    numeric: true,
     disablePadding: true,
-    label: "Name of the Order",
+    label: "ORDER ID",
   },
   {
     id: "cost",
     numeric: true,
     disablePadding: false,
-    label: "Cost",
-  },
-  {
-    id: "OrderId",
-    numeric: true,
-    disablePadding: false,
-    label: "OrderId",
+    label: "COST",
   },
   {
     id: "createdOn",
     numeric: true,
     disablePadding: false,
-    label: "Created On",
+    label: "CREATED DATE",
+  },
+  {
+    id: "deliveredOn",
+    numeric: true,
+    disablePadding: false,
+    label: "DELIVERED DATE",
+  },
+  {
+    id: "destination",
+    numeric: false,
+    disablePadding: false,
+    label: "DESTINATION",
   },
   {
     id: "status",
-    numeric: true,
+    numeric: false,
     disablePadding: false,
-    label: "Status",
+    label: "STATUS",
   },
 ];
 
@@ -208,7 +257,7 @@ function EnhancedTableToolbar(props) {
           id="tableTitle"
           component="div"
         >
-          Your Orders
+          YOUR ORDERS
         </Typography>
       )}
 
@@ -249,19 +298,19 @@ export default function Orders() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.id);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
+  const handleClick = (event, id) => {
+    const selectedIndex = selected.indexOf(id);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, id);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -289,7 +338,7 @@ export default function Orders() {
     setDense(event.target.checked);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
+  const isSelected = (id) => selected.indexOf(id) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -305,12 +354,13 @@ export default function Orders() {
   );
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
       <Paper
         sx={{
-          width: "100%",
+          // width: "100%",
+          width: { xs: "90%", sm: "95%", lg: "100%" },
           m: 2,
-          // backgroundColor: "#dbd8e8",
+          backgroundColor: "#dbd8e8",
         }}
       >
         <EnhancedTableToolbar numSelected={selected.length} />
@@ -330,17 +380,17 @@ export default function Orders() {
             />
             <TableBody>
               {visibleRows.map((row, index) => {
-                const isItemSelected = isSelected(row.name);
+                const isItemSelected = isSelected(row.id);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
                 return (
                   <TableRow
                     hover
-                    onClick={(event) => handleClick(event, row.name)}
+                    onClick={(event) => handleClick(event, row.id)}
                     role="checkbox"
                     aria-checked={isItemSelected}
                     tabIndex={-1}
-                    key={row.name}
+                    key={row.id}
                     selected={isItemSelected}
                     sx={{ cursor: "pointer" }}
                   >
@@ -359,11 +409,12 @@ export default function Orders() {
                       scope="row"
                       padding="none"
                     >
-                      {row.name}
+                      {row.id}
                     </TableCell>
                     <TableCell align="right">{row.cost}</TableCell>
-                    <TableCell align="right">{row.orderId}</TableCell>
                     <TableCell align="right">{row.createdOn}</TableCell>
+                    <TableCell align="right">{row.deliveredOn}</TableCell>
+                    <TableCell align="right">{row.destination}</TableCell>
                     <TableCell align="right">{row.status}</TableCell>
                   </TableRow>
                 );

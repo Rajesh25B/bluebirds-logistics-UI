@@ -13,7 +13,7 @@ import PaymentIcon from "@mui/icons-material/Payment";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ContactMailIcon from "@mui/icons-material/ContactMail";
 import SecurityIcon from "@mui/icons-material/Security";
-import { Badge, styled } from "@mui/material";
+import { Badge, styled, useMediaQuery } from "@mui/material";
 import BalanceIcon from "@mui/icons-material/Balance";
 import Orders from "./Orders";
 import Inbox from "./Inbox";
@@ -60,6 +60,7 @@ function a11yProps(index) {
 
 export default function Sidebar() {
   const [value, setValue] = React.useState(0);
+  const mediumViewport = useMediaQuery("(min-width:768px)");
 
   const dispatch = useDispatch();
 
@@ -129,7 +130,7 @@ export default function Sidebar() {
   const customerTabs = (
     <>
       <Tabs
-        orientation="vertical"
+        orientation={mediumViewport ? "vertical" : "horizontal"}
         variant="scrollable"
         value={value}
         onChange={handleChange}
@@ -193,10 +194,12 @@ export default function Sidebar() {
 
   return (
     <Box
+      pt={8}
       sx={{
         display: "flex",
         flexGrow: 1,
-        height: "350px",
+        height: { xs: "280px", sm: "350px", lg: "350px" },
+        flexDirection: { xs: "column", sm: "row", lg: "row" },
       }}
     >
       {user.type === "SHIPPER" ? shipperTabs : customerTabs}

@@ -25,7 +25,7 @@ function getRefreshToken() {
 
 axios.defaults.xsrfCookieName = "csrftoken";
 axios.defaults.xsrfHeaderName = "X-CSRFToken";
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
 
 // Create an Axios instance with a base URL and other configurations
 const client = axios.create({
