@@ -15,6 +15,8 @@ import Section2 from "./BodySections/Section2";
 import Section3 from "./BodySections/Section3";
 import Section4 from "./BodySections/Section4";
 import Section5 from "./BodySections/Section5";
+import { CustomButtonRoute } from "../../routes/CustomButtonRoute";
+import { Link } from "react-router-dom";
 
 const backgroundImage =
   "https://images.unsplash.com/photo-1519003722824-194d4455a60c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1475&q=80";
@@ -50,18 +52,18 @@ export default function Body() {
           letterSpacing="-0.8px"
           sx={{ mb: 4, mt: { xs: 4, sm: 10 } }}
         >
-          Your package's safety is everything.
+          Your package's safety is our atmost priority.
         </Typography>
-        <Button
-          color="primary"
-          variant="contained"
-          size="large"
-          component="a"
-          href="/"
-          sx={{ minWidth: 200 }}
-        >
-          More Info
-        </Button>
+        <Link to="/services/">
+          <Button
+            color="primary"
+            variant="contained"
+            size="large"
+            sx={{ minWidth: 200 }}
+          >
+            More Info
+          </Button>
+        </Link>
         <Typography color="inherit" sx={{ mt: 2 }} component={"span"}>
           Discover the experience
         </Typography>
@@ -89,22 +91,24 @@ export default function Body() {
             label="Track your package"
             variant="outlined"
             sx={{ width: { sx: "40ch", sm: "60ch", lg: "70ch" } }}
-            helperText="Please enter your consignment number"
+            helperText="Enter package's consignment number"
             maxRows={1}
             InputProps={{
               endAdornment: (
-                <IconButton
-                  component="a"
-                  href="/"
-                  type="button"
-                  sx={{ p: "10px" }}
-                  aria-label="search"
-                  position="end"
-                  bgcolor="black"
-                >
-                  <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                  <SearchIcon bgcolor="black" />
-                </IconButton>
+                <Link to="/track/package/">
+                  <IconButton
+                    type="button"
+                    sx={{ p: "10px" }}
+                    aria-label="search"
+                    position="end"
+                  >
+                    <Divider
+                      sx={{ height: 28, m: 0.5 }}
+                      orientation="vertical"
+                    />
+                    <SearchIcon />
+                  </IconButton>
+                </Link>
               ),
             }}
           />

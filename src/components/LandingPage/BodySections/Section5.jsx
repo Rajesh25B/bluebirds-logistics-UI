@@ -35,7 +35,6 @@ function CustomCard({ backgroundCardImg, content1, content2 }) {
         backgroundImage: `url(https://images.unsplash.com/photo-1522441815192-d9f04eb0615c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1254&q=80)`,
         backgroundColor: "yellow",
         display: "flex",
-        marginTop: "15px",
       }}
     >
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -114,8 +113,8 @@ export default function Section5() {
             display: "flex",
             justifyContent: "flex-start",
             height: 250,
-            marginLeft: { xs: "15px", sm: "200px" },
-            marginBottom: { xs: "180px", sm: "120px" },
+            marginLeft: { xs: "40px", sm: "80px", lg: "100px", xl: "150px" },
+            marginBottom: { xs: "110px", sm: "80px", lg: "60px" },
           }}
         >
           <Tabs
@@ -124,7 +123,12 @@ export default function Section5() {
             value={value}
             onChange={handleChange}
             aria-label="Vertical tabs example"
-            sx={{ borderRight: 1, borderColor: "divider", marginTop: "30px" }}
+            sx={{
+              borderRight: 1,
+              borderColor: "divider",
+              marginTop: "30px",
+              overflow: "revert",
+            }}
           >
             <Tab
               label="New Delhi"
@@ -145,7 +149,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="HYD"
+              label="HYDERABAD"
               {...a11yProps(2)}
               sx={{
                 fontWeight: "600",
@@ -154,7 +158,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="Chennai"
+              label="CHENNAI"
               {...a11yProps(3)}
               sx={{
                 fontWeight: "600",
@@ -163,7 +167,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="Pune"
+              label="PUNE"
               {...a11yProps(4)}
               sx={{
                 fontWeight: "600",
@@ -172,7 +176,7 @@ export default function Section5() {
               }}
             />
             <Tab
-              label="Coming soon.."
+              label="COMING SOON.."
               {...a11yProps(5)}
               sx={{
                 fontWeight: "600",
@@ -185,7 +189,7 @@ export default function Section5() {
           <TabPanel value={value} index={0}>
             <CustomCard
               content1="Green Park Extension, New Delhi, Delhi 110016"
-              content2="MOHAN SINGH MARKET, D-9, Ranji Nagar, Sector 6, RKPURAM, New Delhi, 110022"
+              content2="MOHAN SINGH MARKET, D-9, RKPURAM, New Delhi, 110022"
             />
           </TabPanel>
           <TabPanel value={value} index={1}>
@@ -205,13 +209,19 @@ export default function Section5() {
           </TabPanel>
 
           <TabPanel value={value} index={3}>
-            <CustomCard content1="Chennai" content2="Opening soon" />
+            <CustomCard
+              content1="Paruthippattu, Avadi, Chennai, Tamil Nadu 600071"
+              content2="215, Mount Poonamallee Rd, Porur, Chennai, Tamil Nadu 600116"
+            />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <CustomCard content1="Pune" content2="Opening soon" />
+            <CustomCard
+              content1="Shop no 90/91 Parmar nagar Phase 5, Pune, Maharashtra 411013"
+              content2="AKD PLAZA, JI, Vijay-Mahal Society, Pune, Maharashtra 411037"
+            />
           </TabPanel>
           <TabPanel value={value} index={5}>
-            <CustomCard content1="Opening soon" content2="More Braches Soon" />
+            <CustomCard content1="Opening more branches soon across INDIA" />
           </TabPanel>
         </Box>
       </Box>

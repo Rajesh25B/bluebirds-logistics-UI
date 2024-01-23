@@ -3,10 +3,10 @@ import {
   Button,
   Typography,
   createTheme,
-  Container,
   ThemeProvider,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const theme = createTheme({
   breakpoints: {
@@ -72,9 +72,11 @@ export default function Section2() {
             >
               Calculate your Freight
             </Typography>
-            <Button size="small" variant="contained" component="a" href="/">
-              CALCULATOR
-            </Button>
+            <Link to="/">
+              <Button size="large" variant="contained">
+                CALCULATOR
+              </Button>
+            </Link>
           </Box>
         </Box>
       </ThemeProvider>
