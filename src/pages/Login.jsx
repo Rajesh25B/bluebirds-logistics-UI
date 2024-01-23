@@ -8,7 +8,6 @@ import FormFeedback from "../components/Form/FormFeedback";
 import withRoot from "../components/Form/withRoot";
 import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import LoginForm from "../components/Form/LoginForm";
-import Navbar from "../components/LandingPage/Navbar";
 import { Link, Navigate } from "react-router-dom";
 import OnChange from "../components/Form/onChange";
 import { loginThunk } from "../store/thunks/loginThunk";
@@ -105,7 +104,6 @@ function Login() {
 
   return (
     <>
-      <Navbar />
       <LoginForm>
         <Box align="center" mb={1}>
           <Avatar sx={{ backgroundColor: "primary.dark" }}>

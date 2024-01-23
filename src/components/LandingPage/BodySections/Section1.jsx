@@ -13,6 +13,11 @@ const ProductContainer = styled("div")(({ theme }) => ({
 const MyBox = styled("img")(({ theme }) => ({
   [theme.breakpoints.down("sm")]: {
     height: "220px",
+    pl: "20px",
+  },
+  [theme.breakpoints.down("md")]: {
+    height: "220px",
+    pl: "50px",
   },
 }));
 

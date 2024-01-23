@@ -112,18 +112,33 @@ export default function Section3() {
           Our commitment to the safety and secure passage of your package is a
           part of our DNA and we continue to be laser focused on this 24/7. We
           have a team of experienced professionals who are dedicated to
-          providing you with the best possible service.
+          providing you with the best possible services from Careful Loading And
+          Unloading Of The Cargo, Strictly Following The Hours Of Service
+          Regulations, Routine Maintenance Of Trucks And Other Vehicles,
+          Detailed Recordkeeping Of Vehicle Maintenance As Well As Service
+          Records.
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          We are committed to 100% product delivery. We understand that your
-          time and money are important, and we take pride in delivering your
-          products on time and in perfect condition. We are always available to
-          answer your questions and address your concerns.
+          In the dynamic realm of the logistics industry, where precision and
+          reliability are paramount, BlueBirds stands out as a beacon of
+          unwavering commitment. With a resolute pledge to excellence, BlueBirds
+          has etched its mark as a trailblazer in delivering unparalleled
+          logistics solutions. At the heart of our commitment lies a dedication
+          to flawless execution and seamless operations. We understand the
+          critical role logistics plays in the supply chain, and our promise is
+          to provide a 100 percent commitment to ensuring the timely and secure
+          transportation of goods.
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
-          We take pride in building trust with our customers. We are committed
-          to providing you with the best possible service, and we always strive
-          to exceed your expectations.
+          At BlueBirds, trust is not just a byproduct of our operations; a
+          conscious choice embedded in our corporate culture. We invest in
+          cutting-edge tech and robust security measures to safeguard our
+          customers' cargo, instilling confidence in the reliability of our
+          logistics solutions. Our dedicated professionals understands that each
+          shipment carries not just goods but the trust of our customers. From
+          clear communication and real-time tracking to reliable delivery
+          timelines, we ensure that our customers are well-informed and
+          confident in the reliability of our services.
         </CustomTabPanel>
       </Box>
     </Box>

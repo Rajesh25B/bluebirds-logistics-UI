@@ -18,17 +18,17 @@ function LoginForm(props) {
       }}
     >
       <Container maxWidth="sm">
-        <Box sx={{ mt: 6, mb: 3, pt: 10 }}>
+        <Box sx={{ mt: 4, mb: 2, pt: 8 }}>
           <Paper
             sx={{
-              py: { xs: 4, md: 8 },
-              px: { xs: 3, md: 6 },
+              py: { xs: 4, md: 4 },
+              px: { xs: 2, md: 12 },
             }}
           >
             {children}
           </Paper>
         </Box>
-        <MiniFooter year={"2023"} />
+        <MiniFooter year={"2024"} />
       </Container>
     </Box>
   );

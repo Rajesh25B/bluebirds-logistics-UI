@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Field, Form, FormSpy } from "react-final-form";
-import Navbar from "../components/LandingPage/Navbar";
 import { validEmail, required } from "../components/Form/FormValidation";
 import FormButton from "../components/Form/FormButton";
 import FormFeedback from "../components/Form/FormFeedback";
@@ -73,7 +72,6 @@ function Register() {
 
   return (
     <>
-      <Navbar />
       <RegisterForm>
         <>
           <Typography

@@ -60,31 +60,30 @@ export default function Footer() {
           }}
         >
           <List>
-            <ListItemButton to="/">About BlueBirds</ListItemButton>
-            <ListItemButton to="/">Group Companies</ListItemButton>
-            <ListItemButton to="/">Safety Measures</ListItemButton>
-            <ListItemButton to="/">Our Presence</ListItemButton>
+            <ListItemButton to="/">ABOUT BLUEBIRDS</ListItemButton>
+            <ListItemButton to="/">GROUP COMPANIES</ListItemButton>
+            <ListItemButton to="/">SAFETY MEASURES</ListItemButton>
+            <ListItemButton to="/">OUR PRESENCE</ListItemButton>
           </List>
           <List>
-            <ListItemButton to="/">FTL Services</ListItemButton>
-            <ListItemButton to="/">Dedicated Loads</ListItemButton>
-            <ListItemButton to="/">Expedited Teams</ListItemButton>
-            <ListItemButton to="/">Trailer Interchange</ListItemButton>
+            <ListItemButton to="/">FTL SERVICES</ListItemButton>
+            <ListItemButton to="/">DEDICATED LOADS</ListItemButton>
+            <ListItemButton to="/">EXPEDITED TEAMS</ListItemButton>
+            <ListItemButton to="/">TRAILER INTERCHANGE</ListItemButton>
           </List>
           <List>
-            <ListItemButton to="/">Industries Served</ListItemButton>
-            <ListItemButton to="/">Foods & Beverages</ListItemButton>
-            <ListItemButton to="/">Paper & Packaging</ListItemButton>
-            <ListItemButton to="/">Retail</ListItemButton>
-            <ListItemButton to="/">Healthcare</ListItemButton>
-            <ListItemButton to="/">Industrial Goods</ListItemButton>
+            <ListItemButton to="/">INDUSTRIES SERVED</ListItemButton>
+            <ListItemButton to="/">FOODS & BEVERAGES</ListItemButton>
+            <ListItemButton to="/">PAPER & PACKAGING</ListItemButton>
+            <ListItemButton to="/">RETAIL</ListItemButton>
+            <ListItemButton to="/">HEALTHCARE</ListItemButton>
           </List>
           <List>
-            <ListItemButton to="/">Testimonials</ListItemButton>
-            <ListItemButton to="/">Careers</ListItemButton>
-            <ListItemButton to="/">Photo Gallery</ListItemButton>
-            <ListItemButton to="/">Privacy Policy</ListItemButton>
-            <ListItemButton to="/">Sitemap</ListItemButton>
+            <ListItemButton to="/">TESTIMONIALS</ListItemButton>
+            <ListItemButton to="/">CAREERS</ListItemButton>
+            <ListItemButton to="/">PHOTO GALLERY</ListItemButton>
+            <ListItemButton to="/">PRIVACY POLICY</ListItemButton>
+            <ListItemButton to="/">SITEMAPS</ListItemButton>
           </List>
         </Container>
         <Box
@@ -127,7 +126,7 @@ export default function Footer() {
             sx={{ display: "flex", justifyContent: "center", fontSize: "12px" }}
           >
             <CopyrightIcon sx={{ height: "18px" }} />
-            BlueBirds Logistics Pvt. Ltd. 2023. All rights reserved.
+            BlueBirds Logistics Pvt. Ltd. 2024. All rights reserved.
           </Typography>
         </Box>
       </MainBox>

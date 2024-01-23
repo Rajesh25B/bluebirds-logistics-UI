@@ -12,6 +12,28 @@ const item = {
   px: 5,
 };
 
+export function SectionBody({ name, context }) {
+  return (
+    <>
+      <Typography
+        // mt={1}
+        ml={5}
+        width="13em"
+        variant="h5"
+        component="div"
+        letterSpacing="-0.5px"
+        fontWeight={800}
+      >
+        {name}
+      </Typography>
+      <hr />
+      <Typography mt={-1} variant="h6" letterSpacing="-0.8px" fontWeight={500}>
+        {context}
+      </Typography>
+    </>
+  );
+}
+
 function Section4() {
   return (
     <>
@@ -27,81 +49,42 @@ function Section4() {
         </Typography>
       </Container>
       <Box
-        component="section"
+        component="div"
         sx={{
+          width: "100%",
           display: "flex",
           overflow: "hidden",
           marginBottom: "2rem",
           backgroundColor: "#c2bbfa",
         }}
       >
-        <Container sx={{ mt: 4, mb: 8, display: "flex" }}>
+        <Container sx={{ mt: 3, mb: 6, display: "flex" }}>
           <Grid container spacing={4}>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <DashboardIcon sx={{ fontSize: "150px" }} />
-                <Typography
-                  mt={1}
-                  ml={5}
-                  width="13em"
-                  variant="h5"
-                  component="div"
-                  letterSpacing="-0.5px"
-                  fontWeight={700}
-                >
-                  Personalized Dashboard
-                </Typography>
-                <hr />
-                <Typography variant="h6">
-                  {
-                    "You can access your dashboard for metrics and reports such as notifications and PR quote history."
-                  }
-                </Typography>
+                <SectionBody
+                  name="Personalized Dashboard"
+                  context="You can access your dashboard for analytics and metrics and recieve reports with notifications and PR quote history."
+                />
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <AccountCircleIcon sx={{ fontSize: "150px" }} />
-                <Typography
-                  mt={1}
-                  ml={5}
-                  width="13em"
-                  variant="h5"
-                  component="div"
-                  letterSpacing="-0.5px"
-                  fontWeight={700}
-                >
-                  Manage Your Account
-                </Typography>
-                <hr />
-                <Typography variant="h6">
-                  {
-                    "You can update your address book, view documents or check the shipment status all at one place."
-                  }
-                </Typography>
+                <SectionBody
+                  name="Manage Your Account"
+                  context="You can update your address book, view documents or check the shipment status all at one place."
+                />
               </Box>
             </Grid>
             <Grid item xs={12} md={4}>
               <Box sx={item}>
                 <TrendingUpIcon sx={{ fontSize: "150px" }} />
-                <Typography
-                  mt={1}
-                  ml={5}
-                  width="10em"
-                  variant="h5"
-                  component="div"
-                  letterSpacing="-0.5px"
-                  fontWeight={700}
-                >
-                  Exclusive rates
-                </Typography>
-                <hr />
-                <Typography variant="h6">
-                  {
-                    "By registering, you will access specially negotiated rates for your packages "
-                  }
-                  {"that you will not find anywhere else."}
-                </Typography>
+                <SectionBody
+                  name="Exclusive rates"
+                  context="By registering, you will access specially negotiated rates for your packages that you will not find anywhere else."
+                />
               </Box>
             </Grid>
           </Grid>

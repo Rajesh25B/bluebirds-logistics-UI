@@ -9,7 +9,7 @@ import {
   Toolbar,
 } from "@mui/material";
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import MainLogo from "/src/assets/styles/svg/MainLogo";
 import styled from "@emotion/styled";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -77,11 +77,14 @@ function Navbar() {
                 paddingLeft: { xs: "none", sm: "none", md: 30, lg: 60 },
               }}
             >
-              <CustomButtonRoute to={`/track/`} name="Track your package" />
+              <CustomButtonRoute
+                to={`/track/package/`}
+                name="Track your package"
+              />
               <CustomButtonRoute to={`/about/`} name="About" />
               <CustomButtonRoute to={`/services/`} name="Services" />
-              {/* <CustomButtonRoute to={`/login/`} name="Login" /> */}
-              <Button color="inherit" onClick={onclick}>
+              <CustomButtonRoute to={`/login/`} name="Login" />
+              {/* <Button color="inherit" onClick={onclick}>
                 <Box
                   component="a"
                   href="/login/"
@@ -89,7 +92,7 @@ function Navbar() {
                 >
                   Login
                 </Box>
-              </Button>
+              </Button> */}
               <CustomButtonRoute to={`/register/`} name="Register" />
               {/* <Button color="inherit" onClick={onclick}>
                 <Box
