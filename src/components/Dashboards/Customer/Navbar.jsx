@@ -74,18 +74,18 @@ function Navbar() {
   const authLinks = (
     <>
       <CustomButtonRoute
-        to={`/customer/home/`}
+        to={`/home/`}
         name={isLoading ? "" : `${user.username}`}
       />
       <CustomButtonRoute
-        to={`/customer/home/`}
+        to={`/home/`}
         name="HOME"
-        onclick={() => dispatch(getUserThunk())}
+        // onclick={() => dispatch(getUserThunk())}
       />
       <CustomButtonRoute
-        to={`/customer/profile/`}
+        to={`/profile/`}
         name="Profile"
-        onclick={() => dispatch(getUserThunk())}
+        // onclick={() => dispatch(getUserThunk())}
       />
       <Icons color="inherit" px={1}>
         <Badge badgeContent={0} color="error">
@@ -146,9 +146,11 @@ function Navbar() {
   );
 
   const logoutModalButton = (
-    <Button variant="contained" onClick={() => dispatch(logoutThunk())}>
-      Logout
-    </Button>
+    <Link to="/">
+      <Button variant="contained" onClick={() => dispatch(logoutThunk())}>
+        Logout
+      </Button>
+    </Link>
   );
   const goBackModalButton = (
     <Button variant="contained" onClick={() => setOpenModal(false)}>
@@ -166,7 +168,7 @@ function Navbar() {
     </Modal>
   );
 
-  if (!isAuthenticated) return <Navigate to="/login/" />;
+  // if (!isAuthenticated) return <Navigate to="/home/" />;
 
   return (
     <>
@@ -190,7 +192,7 @@ function Navbar() {
                 variant="text"
                 disableRipple
               >
-                <Link to={`/customer/home/`}>
+                <Link to={`/home/`}>
                   <MainLogo />
                 </Link>
               </IconButton>
@@ -235,7 +237,7 @@ function Navbar() {
               }}
             >
               <MenuItem onClick={handleClose}>
-                <CustomButtonRoute to={`/customer/home/`} name="Home" />
+                <CustomButtonRoute to={`/home/`} name="Home" />
               </MenuItem>
 
               <MenuItem onClick={handleClose}>

@@ -37,7 +37,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 1 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -60,7 +60,7 @@ function a11yProps(index) {
 
 export default function Sidebar() {
   const [value, setValue] = React.useState(0);
-  const mediumViewport = useMediaQuery("(min-width:768px)");
+  const mediumViewport = useMediaQuery("(min-width:600px)");
 
   const dispatch = useDispatch();
 
@@ -139,6 +139,7 @@ export default function Sidebar() {
           display: "flex",
           borderRight: 2,
           borderColor: "divider",
+          minHeight: "80px",
         }}
       >
         <Tab

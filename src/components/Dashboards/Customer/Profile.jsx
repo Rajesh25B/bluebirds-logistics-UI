@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navbar } from "./Navbar";
+
 import {
   Box,
   CircularProgress,
@@ -17,8 +17,10 @@ import FormButton from "../../Form/FormButton";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfileThunk } from "../../../store/thunks/updateProfileThunk";
 import { Navigate } from "react-router-dom";
+import { Navbar } from ".";
+import Auth from "../../../utils/auth";
 
-export function Profile() {
+function Profile() {
   const { isLoading, isAuthenticated, user, error, status } = useSelector(
     (state) => state.user
   );
@@ -72,8 +74,6 @@ export function Profile() {
       throw error;
     }
   };
-
-  if (!isAuthenticated) return <Navigate to="/login/" />;
 
   return (
     <>
@@ -213,3 +213,5 @@ export function Profile() {
     </>
   );
 }
+
+export default Auth(Profile);

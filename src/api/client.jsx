@@ -37,15 +37,12 @@ const client = axios.create({
 });
 
 client.interceptors.request.use(async (config) => {
-  let accessToken = getAccessToken();
+  const token = localStorage.getItem("access");
   // If the access token is not available in memory, check for it in the cookies.
-  if (!accessToken) {
-    const accessTokenCookie = document.cookie.match(/accessToken=([^;]+)/);
-    if (accessTokenCookie) {
-      accessToken = accessTokenCookie[1];
-    }
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  config.headers.Authorization = `Bearer ${accessToken}`;
+
   return config;
 });
 
@@ -73,23 +70,39 @@ client.interceptors.response.use(
   async (response) => response,
   async (error) => {
     if (error.response.status === 401) {
-      // Token expired, try to refresh the access token
-      try {
-        const newAccessToken = await refreshAccessToken();
-        // Retry the failed request with the new access token
-        const originalRequest = error.config;
-        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-        return client(originalRequest);
-      } catch (refreshError) {
-        // Handle the error when refresh fails
-        // For example, you can redirect the user to the login page
-        // console.error("Refresh failed:", refreshError);
-        console.log(refreshError);
-        // Handle the error or redirect to the login page
+      // Token has expired, attempt to refresh it
+      const refreshToken = localStorage.getItem("refresh");
+      if (refreshToken) {
+        // Send a refresh token request to the server
+        try {
+          const refreshResponse = axios.post("/refresh/", {
+            refresh_token: refreshToken,
+          });
+          const newAccessToken = refreshResponse.data.access;
+          const newRefreshToken = refreshResponse.data.refresh;
+
+          // Update localStorage with the new tokens
+          localStorage.setItem("token", newAccessToken);
+          localStorage.setItem("refreshToken", newRefreshToken);
+
+          // Retry the original request with the new access token
+          return axiosInstance(error.config);
+        } catch (error) {
+          // Refresh token failed, log out the user
+          localStorage.removeItem("token");
+          localStorage.removeItem("refreshToken");
+          window.location.href = "/login";
+        }
+      } else {
+        // No refresh token available, log out the user
+        localStorage.removeItem("token");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/login";
       }
+    } else {
+      // Return the error response
+      return Promise.reject(error);
     }
-    // Handle other errors here
-    throw error; // Rethrow the error for further handling
   }
 );
 

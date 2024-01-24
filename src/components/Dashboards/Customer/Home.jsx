@@ -4,29 +4,28 @@ import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserThunk } from "../../../store/thunks/getUserThunk";
 
-import { Navbar } from "./Navbar";
 import { Navigate } from "react-router-dom";
 import Sidebar from "../../Sidebar";
+import Loader from "../../Loader";
+import Auth from "../../../utils/auth";
+import { Navbar } from "./Navbar";
 
-export const Home = () => {
-  const dispatch = useDispatch();
-
+function Home() {
   const { isAuthenticated, user, isLoading, error } = useSelector(
     (state) => state.user
   );
 
-  useEffect(() => {
-    dispatch(getUserThunk());
-  }, []);
-
-  if (!isAuthenticated) return <Navigate to="/login/" />;
-
   return (
     <>
       <Navbar />
-      <Box mt={8} ml={5}>
-        <Sidebar />
-      </Box>
+      {isLoading && !isAuthenticated ? (
+        <Loader />
+      ) : (
+        <Box mt={8} ml={5}>
+          <Sidebar />
+        </Box>
+      )}
     </>
   );
-};
+}
+export default Auth(Home);

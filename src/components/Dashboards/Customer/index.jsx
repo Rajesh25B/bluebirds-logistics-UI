@@ -1,5 +1,5 @@
-import { Home } from "./Home";
+import Home from "./Home";
 import { Navbar } from "./Navbar";
-import { Profile } from "./Profile";
+import Profile from "./Profile";
 
 export { Home, Navbar, Profile };

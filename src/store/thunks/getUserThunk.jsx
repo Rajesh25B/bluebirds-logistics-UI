@@ -8,9 +8,11 @@ const getUserThunk = createAsyncThunk("users/me", async (_, thunkAPI) => {
     if (response.status === 200) {
       return response.data;
     } else {
+      clg(err);
       return thunkAPI.rejectWithValue(response.data);
     }
   } catch (err) {
+    clg(err);
     return thunkAPI.rejectWithValue(err.response.data);
   }
 });

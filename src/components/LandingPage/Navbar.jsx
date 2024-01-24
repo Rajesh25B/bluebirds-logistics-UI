@@ -2,6 +2,7 @@ import { createTheme } from "@mui/material/styles";
 import {
   AppBar,
   Box,
+  Button,
   IconButton,
   Menu,
   MenuItem,
@@ -83,8 +84,8 @@ function Navbar() {
               />
               <CustomButtonRoute to={`/about/`} name="About" />
               <CustomButtonRoute to={`/services/`} name="Services" />
-              <CustomButtonRoute to={`/login/`} name="Login" />
-              {/* <Button color="inherit" onClick={onclick}>
+              {/* <CustomButtonRoute to={`/login/`} name="Login" /> */}
+              <Button color="inherit" onClick={onclick}>
                 <Box
                   component="a"
                   href="/login/"
@@ -92,7 +93,7 @@ function Navbar() {
                 >
                   Login
                 </Box>
-              </Button> */}
+              </Button>
               <CustomButtonRoute to={`/register/`} name="Register" />
               {/* <Button color="inherit" onClick={onclick}>
                 <Box
