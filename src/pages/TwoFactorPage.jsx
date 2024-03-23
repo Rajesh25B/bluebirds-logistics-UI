@@ -66,7 +66,7 @@ function TwoFactorPage() {
     );
   };
 
-  if (isAuthenticated) return <Navigate to="/customer/home/" />;
+  if (isAuthenticated) return <Navigate to="/home/" />;
 
   return (
     <>
